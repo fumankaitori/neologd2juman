@@ -79,5 +79,6 @@ if __name__ == "__main__":
             sys.stderr.write("{}M lines done\n".format(i / 1000000))
         elif i != 0 and i % 10000 == 0:
             sys.stderr.write(".")
+            sys.stderr.flush()
 
     sys.stderr.write("{} lines done\n".format(i))
