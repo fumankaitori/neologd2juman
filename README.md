@@ -1,0 +1,1 @@
+# neologd2juman
