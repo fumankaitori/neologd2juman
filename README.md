@@ -26,7 +26,7 @@ You can run the shell script packing a series of steps:
 $ bash neologd2juman.sh INPUT
 ```
 
-If you run above script, you can obtain 4 or more files below:
+If you run above script, you can obtain 4 or more files in the running directory.
 
 - INPUT.dic
 - INPUT.int
@@ -34,7 +34,7 @@ If you run above script, you can obtain 4 or more files below:
 - jumandic.dat
 - jumandic.pat
 
-INPUT.dic is text file of Juman dictionary format obtained by this module. Other outputs are made by Juman scripts.
+INPUT.dic is text file of Juman dictionary format obtained by this script. Other files are made by Juman scripts.
 
 Example of Juman dictionary format:
 
@@ -58,7 +58,7 @@ You may create other `jumanrc` instead of default `.jumanrc`.
 )
 ```
 
-## Output example of Juman
+## Output examples of Juman
 
 Before adding:
 
@@ -111,4 +111,4 @@ $ echo "エン・ジャパン（株）は、西新宿駅の近くにある新宿
 EOS
 ```
 
-"エン・ジャパン（株）", "西新宿駅" and "新宿アイランドタワー" are one morphemes by neologd.
+"エン・ジャパン（株）", "西新宿駅" and "新宿アイランドタワー" are regardes as one morphemes by neologd.
