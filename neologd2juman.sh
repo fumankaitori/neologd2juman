@@ -20,7 +20,7 @@ echo 'End Converting mecab-neologd-ipadic into juman format.'
 # メモリが溢れないようにintファイルを分割
 split -l 500000 ./${input_base}.int ./${input_base}.int-
 
-rm jumandic.dat
+: > jumandic.dat
 for int_file in ./${input_base}.int-*
 do
   /usr/local/opt/juman/libexec/juman/dicsort ${int_file} >> jumandic.dat
