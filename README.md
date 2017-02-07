@@ -20,7 +20,7 @@ Convert `mecab-ipadic-neologd` to Juman dictionary
 make
 ```
 
-If there is no error, you see following error at end of make
+If there is no error, you see following message at end of make
 
 ```
 New juman dictionary is at /usr/local/share/juman/juman-neologd-dic

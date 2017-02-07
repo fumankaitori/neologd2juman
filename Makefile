@@ -9,4 +9,3 @@ clean:
 	rm mecab-ipadic-neologd.tar
 	rm -r neologd-mecab-ipadic-neologd-*
 	rm -r mecab-user-dict-seed.csv*
-	rm jumandic.dat
