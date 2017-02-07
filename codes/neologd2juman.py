@@ -14,20 +14,8 @@ if sys.version_info < (3, 0, 0):
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
-
-import pip
-
-try:
-    import mojimoji
-except ImportError:
-    pip.main(['install', 'mojimoji'])
-    import mojimoji
-
-try:
-    import jaconv
-except ImportError:
-    pip.main(['install', 'jaconv'])
-    import jaconv
+import mojimoji
+import jaconv
 
 def return_subpos(raw):
     if raw[4] == "記号":

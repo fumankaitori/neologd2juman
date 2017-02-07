@@ -51,6 +51,20 @@ fi
 echo "Use juman tools in = "$juman_utils_bin
 echo 'Start...'
 
+echo "import pip
+try:
+    import mojimoji
+except ImportError:
+    pip.main(['install', 'mojimoji'])
+    import mojimoji" | python3
+
+echo "import pip
+try:
+    import jaconv
+except ImportError:
+    pip.main(['install', 'jaconv'])
+    import jaconv" | python3
+
 # neologdのmecab形式から、juman形式の辞書に変換
 # また、文字数の多すぎるエントリや、絵文字、顔文字等の記号を排除
 python3 ${binary_path}/codes/neologd2juman.py < $1 > ./${input_base}.dic
