@@ -9,6 +9,8 @@ usage: python neologd2juman.py < mecab-user-dict-seed.20160509.csv
 
 import sys
 import argparse
+if sys.version_info < (3, 0, 0):
+    raise Exception('This system requires python >= 3.x')
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
@@ -48,6 +50,17 @@ def my_csv_reader(csv_reader):
             pass
 
 if __name__ == "__main__":
+    import pip
+    try:
+        import mojimoji
+    except ImportError:
+        pip.main(['install', 'mojimoji'])
+
+    try:
+        import jaconv
+    except ImportError:
+        pip.main(['install', 'jaconv'])
+
     parser = argparse.ArgumentParser(usage='%(prog)s [options] < INPUT')
     args = parser.parse_args()
 

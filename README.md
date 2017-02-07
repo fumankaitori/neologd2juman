@@ -2,23 +2,38 @@
 
 Convert `mecab-ipadic-neologd` to Juman dictionary
 
-## mecab-ipadic-neologd
-
-See https://github.com/neologd/mecab-ipadic-neologd
-
 ## Required
 
+- Python (>= 3.x)
 - Juman
 - mojimoji
   - python package: convert one-byte character to two-byte character
 - jaconv
   - python package: convert katakana to hiragana
+- mecab-ipadic-neologd
+  - See https://github.com/neologd/mecab-ipadic-neologd
 
-## Preparation
+## Install
+
+
+```
+make
+```
+
+If there is no error, you see following error at end of make
+
+```
+```
+
+
+## Manual Installation
+
+### 1. Preparation
 
 You need to install `mecab-ipadic-neologd` and unzip `seed/mecab-user-dict-seed.*.csv.xz`
 
-## How to use this script
+
+### 2. Generate juman-neologd dictionary
 
 You can run the shell script packing a series of steps:
 
@@ -44,7 +59,7 @@ Example of Juman dictionary format:
 (名詞 (固有名詞 ((見出し語 新宿アイランドタワー) (読み しんじゅくあいらんどたわー) (意味情報 "代表表記:新宿アイランドタワー/しんじゅくあいらんどたわー"))))
 ```
 
-## How to use obatained Juman dictoinary
+### 3. Edit your .jumanrc file
 
 You should add the path of Juman dictionary to `.jumanrc`.
 You may create other `jumanrc` instead of default `.jumanrc`.
@@ -54,11 +69,19 @@ You may create other `jumanrc` instead of default `.jumanrc`.
         /usr/local/Cellar/juman/7.01/share/juman/dic
         /usr/local/Cellar/juman/7.01/share/juman/autodic
         /usr/local/Cellar/juman/7.01/share/juman/wikipediadic
-        /your/jumandic/dir
+        /your/jumandic/dir <- You write generated dictionary here!
 )
 ```
 
-## Output examples of Juman
+
+# Comparison of Juman output
+
+You can call new dictionary with `-r` flag of Juman
+
+```
+echo "[input sentence here]" | juman -r [path to jumanrc file]
+```
+
 
 Before adding:
 
