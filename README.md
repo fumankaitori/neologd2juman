@@ -23,6 +23,8 @@ make
 If there is no error, you see following error at end of make
 
 ```
+New juman dictionary is at /usr/local/share/juman/juman-neologd-dic
+New jumanrc file is at /usr/local/share/juman/jumanrc
 ```
 
 
