@@ -54,11 +54,31 @@ echo 'Start...'
 # neologdのmecab形式から、juman形式の辞書に変換
 # また、文字数の多すぎるエントリや、絵文字、顔文字等の記号を排除
 python3 ${binary_path}/codes/neologd2juman.py < $1 > ./${input_base}.dic
+res_neologd2juman=$?
+if [ $res_neologd2juman -eq 1 ]; then
+    echo "Failed to generate juman dictionary from csv file. End."
+    exit 1
+elif [ $res_neologd2juman -eq 2 ]; then
+    echo "Failed to generate juman dictionary from csv file. End."
+    exit 1
+else
+    :
+fi
 
 echo 'End Converting mecab-neologd-ipadic into juman format.'
 
 # jumanで利用できる辞書（jumandic.dat、jumandic.pat）にコンパイル
 ${juman_utils_bin}"makeint" ./${input_base}.dic
+res_juman_makeint=$?
+if [ $res_juman_makeint -eq 1 ]; then
+    echo "Failed to generate compile juman dictionary with makeint. End."
+    exit 1
+elif [ $res_juman_makeint -eq 2 ]; then
+    echo "Failed to generate compile juman dictionary with makeint. End."
+    exit 1
+else
+    :
+fi
 
 # メモリが溢れないようにintファイルを分割
 split -l 500000 ./${input_base}.int ./${input_base}.int-
@@ -70,5 +90,16 @@ do
 done
 
 ${juman_utils_bin}"makepat" ./${input_base}.int
+res_makepat=$?
+if [ $res_makepat -eq 1 ]; then
+    echo "Failed to generate compile juman dictionary with makepat. End."
+    exit 1
+elif [ $res_makepat -eq 2 ]; then
+    echo "Failed to generate compile juman dictionary with makepat. End."
+    exit 1
+else
+    :
+fi
+
 
 echo 'End Compiling.'

@@ -15,8 +15,19 @@ if sys.version_info < (3, 0, 0):
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
 
-import jaconv   # 平仮名カタカナ変換用モジュール
-import mojimoji # 半角全角変換用モジュール
+import pip
+
+try:
+    import mojimoji
+except ImportError:
+    pip.main(['install', 'mojimoji'])
+    import mojimoji
+
+try:
+    import jaconv
+except ImportError:
+    pip.main(['install', 'jaconv'])
+    import jaconv
 
 def return_subpos(raw):
     if raw[4] == "記号":
@@ -50,16 +61,7 @@ def my_csv_reader(csv_reader):
             pass
 
 if __name__ == "__main__":
-    import pip
-    try:
-        import mojimoji
-    except ImportError:
-        pip.main(['install', 'mojimoji'])
 
-    try:
-        import jaconv
-    except ImportError:
-        pip.main(['install', 'jaconv'])
 
     parser = argparse.ArgumentParser(usage='%(prog)s [options] < INPUT')
     args = parser.parse_args()
