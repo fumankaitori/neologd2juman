@@ -57,6 +57,7 @@ JUMAN_RC_FILE_TEMPLATE = """
 (辞書ファイル
         {path_default_dict}/dic
         {path_default_dict}/autodic
+        {path_default_dict}/wikipediadic
         {path_new_dict}
 )
 """
