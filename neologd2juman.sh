@@ -17,10 +17,7 @@ elif [ `uname` = "Linux" ]; then
 fi
 
 
-if [ $# -ne 1 ]; then
-    echo "[Error] Usage: ./neologd2juman.sh INPUT_neologd [juman-installed-path]"
-    exit 1
-elif [ $# -eq 1 ]; then
+if [ $# -eq 1 ]; then
     input_base=`basename $1`
 elif [ $# -eq 2 ]; then
     input_base=`basename $1`
