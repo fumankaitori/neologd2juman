@@ -16,6 +16,9 @@ if sys.version_info < (3, 0, 0):
 import csv
 import mojimoji
 import jaconv
+import logging
+logger = logging.getLogger(__file__)
+
 
 def return_subpos(raw):
     if raw[4] == "記号":
@@ -37,6 +40,7 @@ def return_subpos(raw):
             return "組織名"
     return raw[5]
 
+
 def my_csv_reader(csv_reader):
     """
     NULL回避のためのcsvジェネレータ
@@ -49,7 +53,6 @@ def my_csv_reader(csv_reader):
             pass
 
 if __name__ == "__main__":
-
 
     parser = argparse.ArgumentParser(usage='%(prog)s [options] < INPUT')
     args = parser.parse_args()
@@ -64,10 +67,11 @@ if __name__ == "__main__":
         subpos = return_subpos(raw)
         midasi = mojimoji.han_to_zen(raw[0])
         daihyo = mojimoji.han_to_zen(raw[10])
-        yomi = jaconv.kata2hira(raw[11])
+        yomi = jaconv.kata2hira(mojimoji.han_to_zen(raw[11]))
 
         # 読みが長すぎると辞書のコンパイルに失敗するので、長すぎるものは除外
         if len(midasi) > 40 or len(yomi) > 40:
+            logger.debug("[Warning] Following line was ignored because word entry length is >40. Entry={}".format(raw[0]))
             continue
 
         info = {'pos': pos,

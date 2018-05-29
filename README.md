@@ -4,6 +4,8 @@ Convert `mecab-ipadic-neologd` to [Juman](http://nlp.ist.i.kyoto-u.ac.jp/index.p
 
 You're able to use this dictionary file for [Juman++](http://nlp.ist.i.kyoto-u.ac.jp/index.php?JUMAN++) also.
 
+Note: this script ignores word entry having length > 40. This is because of limitation of dictionary-generation-command.
+
 ## Required
 
 - Python (>= 3.x)
@@ -27,6 +29,12 @@ If there is no error, you see following message at end of make
 ```
 New juman dictionary is at /usr/local/share/juman/juman-neologd-dic
 New jumanrc file is at /usr/local/share/juman/jumanrc
+```
+
+Finally, you can call the generated dictionary with 
+
+```
+echo "[input sentence here]" | juman -r [path to new jumanrc file]
 ```
 
 
@@ -154,7 +162,7 @@ After Adding:
 
 ```
 $ echo "エン・ジャパン（株）は、西新宿駅の近くにある新宿アイランドタワー内の会社だ。" | juman -r jumanrc
-エン・ジャパン（株） えんじゃぱんかぶしきがいしゃ エン・ジャパン（株） 名詞 6 組織名 6 * 0 * 0 "代表表記:エン・ジャパン株式会社/えんじゃぱんかぶしきがいしゃ"
+エン・ジャパン（株） えんじゃぱんかぶしきがいしゃ エン・ジャパン（株） 名詞 6 組織名 6 * 0 * 0 "代表表記:エン・ジャパン/えんじゃぱんかぶしきがいしゃ"
 は は は 助詞 9 副助詞 2 * 0 * 0 NIL
 、 、 、 特殊 1 読点 2 * 0 * 0 NIL
 西新宿駅 にししんじゅくえき 西新宿駅 名詞 6 固有名詞 3 * 0 * 0 "代表表記:西新宿駅/にししんじゅくえき"
@@ -164,6 +172,7 @@ $ echo "エン・ジャパン（株）は、西新宿駅の近くにある新宿
 に に に 助詞 9 格助詞 1 * 0 * 0 NIL
 ある ある ある 動詞 2 * 0 子音動詞ラ行 10 基本形 2 "代表表記:有る/ある 補文ト 反義:形容詞:無い/ない"
 新宿アイランドタワー しんじゅくあいらんどたわー 新宿アイランドタワー 名詞 6 固有名詞 3 * 0 * 0 "代表表記:新宿アイランドタワー/しんじゅくあいらんどたわー"
+@ 新宿アイランドタワー しんじゅくあいらんどたわー 新宿アイランドタワー 名詞 6 地名 4 * 0 * 0 "代表表記:新宿アイランドタワー/しんじゅくあいらんどたわー"
 内 ない 内 接尾辞 14 名詞性名詞接尾辞 2 * 0 * 0 "代表表記:内/ない"
 の の の 助詞 9 接続助詞 3 * 0 * 0 NIL
 会社 かいしゃ 会社 名詞 6 普通名詞 1 * 0 * 0 "代表表記:会社/かいしゃ カテゴリ:組織・団体;場所-施設 ドメイン:ビジネス"
@@ -172,7 +181,7 @@ $ echo "エン・ジャパン（株）は、西新宿駅の近くにある新宿
 EOS
 ```
 
-"エン・ジャパン（株）", "西新宿駅" and "新宿アイランドタワー" are regardes as one morphemes by neologd.
+"エン・ジャパン（株）", "西新宿駅" and "新宿アイランドタワー" are regarded as one morphemes by neologd.
 
 ## Juman++
 
