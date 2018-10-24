@@ -1,0 +1,13 @@
+# 開発/test環境としてまとめてdocker環境を整えるためのcompose
+version: '3'
+services:
+  dev_env:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - .:/neologd2juman/
+    working_dir: /neologd2juman
+    stdin_open: true
+    command: make
+    tty: true

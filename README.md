@@ -238,3 +238,15 @@ You see following improvement,
 
 - `エン・ジャパン（株）`
 - `西新宿駅`
+
+# For developers
+
+This project has test environment with docker.
+
+You could build docker image and run test with following commands
+
+```bash
+$ docker-compose build
+$ docker-compose up
+```
+
