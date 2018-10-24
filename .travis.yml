@@ -9,8 +9,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - docker-compose build
-  - docker-compose up
+  - sudo docker-compose build
+  - sudo docker-compose up
 notifications:
   email:
     recipients:
