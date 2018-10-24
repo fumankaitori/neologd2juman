@@ -1,55 +1,18 @@
-sudo : required
-language: python
-python:
-  - 3.5
-addons:
-  apt:
-    packages:
-    - git
-    - make
-    - curl
-    - xz-utils
-    - file
-    - pandoc
-    - libboost-all-dev
-    - ibus-mozc
-    - gcc-5
-    - g++-5
-    - build-essential
-    sources:
-    - ubuntu-toolchain-r-test
+sudo: required
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION: 1.8.0
 before_install:
-  - sudo apt-get update -qq
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 1
-  - export CC="gcc-5"
-  - export CXX="g++-5"
-  - export CFLAGS=-std=c++11
-  - export CXXFLAGS=-std=c++11
-  # install python with miniconda
-  - sudo wget https://repo.continuum.io/miniconda/Miniconda3-4.4.10-Linux-x86_64.sh -O miniconda.sh;
-  - sudo bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - sudo conda config --set always_yes yes --set changeps1 no
-  - sudo conda update -q conda
-  # Useful for debugging any issues with conda
-  - sudo conda info -a
-  - sudo conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
-  - sudo source activate test-environment
-  # check python version
-  - sudo python --version
-  # install juman
-  - wget -O juman7.0.1.tar.bz2 "http://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/juman/juman-7.01.tar.bz2&name=juman-7.01.tar.bz2"
-  - bzip2 -dc juman7.0.1.tar.bz2  | tar xvf -
-  - cd juman-7.01 && sudo ./configure && sudo make && sudo make install
-  - sudo ldconfig
-  - echo 'インストール後のテスト' | juman
-  - cd ../ && pwd
-install:
-  # re check python version
-  - sudo python --version
+    - sudo apt-get update
+    - sudo apt-get -y -q -o Dpkg::Options::="--force-confnew" install docker-engine
+    - sudo rm /usr/local/bin/docker-compose
+    - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+    - chmod +x docker-compose
+    - sudo mv docker-compose /usr/local/bin
 script:
-  - sudo make
+  - docker-compose build
+  - docker-compose run
 notifications:
   email:
     recipients:
