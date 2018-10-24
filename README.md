@@ -8,10 +8,8 @@ Note: this script ignores word entry having length > 40. This is because of limi
 
 ## Required
 
-- Python (>= 3.x)
+- Python (>= 3.0 && <= 3.6.5)
 - Juman
-- mojimoji
-  - python package: convert one-byte character to two-byte character
 - jaconv
   - python package: convert katakana to hiragana
 - mecab-ipadic-neologd

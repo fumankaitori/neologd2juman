@@ -9,12 +9,11 @@ usage: python neologd2juman.py < mecab-user-dict-seed.20160509.csv
 
 import sys
 import argparse
-if sys.version_info < (3, 0, 0):
-    raise Exception('This system requires python >= 3.x')
+if sys.version_info <= (3, 6, 5):
+    raise Exception('This system requires 3.0 <= python <= 3.6')
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
-import mojimoji
 import jaconv
 import logging
 logger = logging.getLogger(__file__)
@@ -52,6 +51,7 @@ def my_csv_reader(csv_reader):
         except csv.Error:
             pass
 
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(usage='%(prog)s [options] < INPUT')
@@ -65,9 +65,9 @@ if __name__ == "__main__":
 
         pos = raw[4]
         subpos = return_subpos(raw)
-        midasi = mojimoji.han_to_zen(raw[0])
-        daihyo = mojimoji.han_to_zen(raw[10])
-        yomi = jaconv.kata2hira(mojimoji.han_to_zen(raw[11]))
+        midasi = jaconv.h2z(raw[0])
+        daihyo = jaconv.h2z(raw[10])
+        yomi = jaconv.kata2hira(jaconv.h2z(raw[11]))
 
         # 読みが長すぎると辞書のコンパイルに失敗するので、長すぎるものは除外
         if len(midasi) > 40 or len(yomi) > 40:

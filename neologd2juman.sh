@@ -50,13 +50,6 @@ echo 'Start...'
 
 echo "import pip
 try:
-    import mojimoji
-except ImportError:
-    pip.main(['install', 'mojimoji'])
-    import mojimoji" | python3
-
-echo "import pip
-try:
     import jaconv
 except ImportError:
     pip.main(['install', 'jaconv'])
