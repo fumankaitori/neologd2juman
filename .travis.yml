@@ -1,3 +1,4 @@
+sudo : required
 language: python
 python:
   - 3.6
@@ -31,7 +32,7 @@ before_install:
   - echo 'インストール後のテスト' | juman
   - cd ../ && pwd
 install:
-  - python --version
+  - sudo python --version
 script:
   - sudo make
 notifications:

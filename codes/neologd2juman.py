@@ -65,9 +65,9 @@ if __name__ == "__main__":
 
         pos = raw[4]
         subpos = return_subpos(raw)
-        midasi = jaconv.h2z(raw[0])
-        daihyo = jaconv.h2z(raw[10])
-        yomi = jaconv.kata2hira(jaconv.h2z(raw[11]))
+        midasi = jaconv.h2z(raw[0], kana=True, ascii=True, digit=True)
+        daihyo = jaconv.h2z(raw[10], kana=True, ascii=True, digit=True)
+        yomi = jaconv.kata2hira(jaconv.h2z(raw[11], kana=True, ascii=True, digit=True))
 
         # 読みが長すぎると辞書のコンパイルに失敗するので、長すぎるものは除外
         if len(midasi) > 40 or len(yomi) > 40:
