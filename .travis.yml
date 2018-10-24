@@ -28,7 +28,7 @@ before_install:
   # install python with miniconda
   - sudo wget https://repo.continuum.io/miniconda/Miniconda3-4.4.10-Linux-x86_64.sh -O miniconda.sh;
   - sudo bash miniconda.sh -b -p $HOME/miniconda
-  - sudo export PATH="$HOME/miniconda/bin:$PATH"
+  - export PATH="$HOME/miniconda/bin:$PATH"
   - sudo hash -r
   - sudo conda config --set always_yes yes --set changeps1 no
   - sudo conda update -q conda
