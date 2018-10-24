@@ -33,7 +33,7 @@ before_install:
 install:
   - python --version
 script:
-  - make
+  - sudo make
 notifications:
   email:
     recipients:
