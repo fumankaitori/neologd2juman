@@ -9,10 +9,9 @@ usage: python neologd2juman.py < mecab-user-dict-seed.20160509.csv
 
 import sys
 import argparse
-print(sys.version_info)
-# if sys.version_info < (3, 0, 0) or sys.version_info > (3, 6):
-#     print(sys.version_info)
-#     raise Exception('This system requires 3.0 <= python <= 3.6')
+if sys.version_info < (3, 0, 0) or sys.version_info > (3, 6):
+    print(sys.version_info)
+    raise Exception('This system requires 3.0 <= python <= 3.6')
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
