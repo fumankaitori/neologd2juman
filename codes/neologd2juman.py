@@ -9,7 +9,7 @@ usage: python neologd2juman.py < mecab-user-dict-seed.20160509.csv
 
 import sys
 import argparse
-if sys.version_info <= (3, 6, 5):
+if sys.version_info < (3, 0, 0) or sys.version_info > (3, 6):
     raise Exception('This system requires 3.0 <= python <= 3.6')
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
