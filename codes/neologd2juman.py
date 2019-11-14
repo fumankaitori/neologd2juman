@@ -51,8 +51,6 @@ def my_csv_reader(csv_reader):
             yield next(csv_reader)
         except csv.Error:
             pass
-        except StopIteration:
-            return
 
 
 if __name__ == "__main__":
