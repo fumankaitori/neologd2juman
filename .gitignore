@@ -2,3 +2,9 @@
 .python-version
 .idea/
 neologd-user-dict.dic
+
+neologd-mecab-ipadic-neologd-*/
+mecab-*.tar
+mecab-*.csv
+mecab-*.int
+mecab-*.dic
