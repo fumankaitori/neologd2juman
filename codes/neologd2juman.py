@@ -21,6 +21,7 @@ import logging
 logger = logging.getLogger(__file__)
 
 RE_WHITE_SPACE = re.compile('\s+')
+RE_HALF_BRACKETS = re.compile('\(|\)')
 
 def return_subpos(raw):
     if raw[4] == "記号":
@@ -66,6 +67,9 @@ if __name__ == "__main__":
     for i, raw in enumerate(my_csv_reader(reader)):
         # スペースを含んでいる単語は除外。jumanの辞書はスペース区切りのため誤動作につながる。
         if RE_WHITE_SPACE.findall(raw[0]):
+            continue
+        # 半角カッコを含む単語も誤動作につながる
+        if RE_HALF_BRACKETS.findall(raw[0]):
             continue
         # 顔文字、絵文字はエラーの原因になっている可能性があるため、とりあえずはじく
         if raw[4] == "記号":
