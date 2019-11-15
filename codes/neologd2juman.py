@@ -16,9 +16,11 @@ import argparse
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
 import jaconv
+import re
 import logging
 logger = logging.getLogger(__file__)
 
+RE_WHITE_SPACE = re.compile('\s+')
 
 def return_subpos(raw):
     if raw[4] == "記号":
@@ -51,6 +53,8 @@ def my_csv_reader(csv_reader):
             yield next(csv_reader)
         except csv.Error:
             pass
+        except StopIteration:
+            return
 
 
 if __name__ == "__main__":
@@ -60,6 +64,9 @@ if __name__ == "__main__":
 
     reader = csv.reader(sys.stdin)
     for i, raw in enumerate(my_csv_reader(reader)):
+        # スペースを含んでいる単語は除外。jumanの辞書はスペース区切りのため誤動作につながる。
+        if RE_WHITE_SPACE.findall(raw[0]):
+            continue
         # 顔文字、絵文字はエラーの原因になっている可能性があるため、とりあえずはじく
         if raw[4] == "記号":
             continue
