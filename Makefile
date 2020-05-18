@@ -1,5 +1,5 @@
 install:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 	wget --no-check-certificate https://github.com/neologd/mecab-ipadic-neologd/tarball/master -O mecab-ipadic-neologd.tar
 	tar -xvf mecab-ipadic-neologd.tar
 	xz -dc ./neologd-mecab-ipadic-neologd-*/seed/mecab-user-dict-seed.*.csv.xz > ./mecab-user-dict-seed.csv
