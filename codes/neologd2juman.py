@@ -15,13 +15,14 @@ import argparse
 
 # csv変換用（統計情報などがほしいわけでもないので、pandasではなくcsvで）
 import csv
-import jaconv
+import jaconvV2
 import re
 import logging
 logger = logging.getLogger(__file__)
 
-RE_WHITE_SPACE = re.compile('\s+')
-RE_HALF_BRACKETS = re.compile('\(|\)')
+RE_WHITE_SPACE = re.compile(r'\s+')
+RE_HALF_BRACKETS = re.compile(r'\(|\)')
+
 
 def return_subpos(raw):
     if raw[4] == "記号":
@@ -59,7 +60,6 @@ def my_csv_reader(csv_reader):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(usage='%(prog)s [options] < INPUT')
     args = parser.parse_args()
 
@@ -77,21 +77,18 @@ if __name__ == "__main__":
 
         pos = raw[4]
         subpos = return_subpos(raw)
-        midasi = jaconv.h2z(raw[0])
-        daihyo = jaconv.h2z(raw[10])
-        yomi = jaconv.kata2hira(jaconv.h2z(raw[11]))
+        midasi = jaconvV2.h2z(raw[0])
+        if any(jaconvV2.is_han(_) for _ in midasi):
+            continue
+        yomi = jaconvV2.kata2hira(jaconvV2.h2z(raw[11]))
 
         # 読みが長すぎると辞書のコンパイルに失敗するので、長すぎるものは除外
         if len(midasi) > 40 or len(yomi) > 40:
-            logger.debug("[Warning] Following line was ignored because word entry length is >40. Entry={}".format(raw[0]))
+            logger.debug(f"[Warning] Following line was ignored because word"
+                         f" entry length is >40. Entry={raw[0]}")
             continue
 
-        info = {'pos': pos,
-                'subpos': subpos,
-                'midasi': midasi,
-                'daihyo': daihyo,
-                'yomi': yomi}
-        print('({pos} ({subpos} ((見出し語 {midasi}) (読み {yomi}) (意味情報 "代表表記:{daihyo}/{yomi}"))))'.format(**info))
+        print(f'({pos} ({subpos} ((見出し語 {midasi}) (読み {yomi}) )))')
 
         # System Message
         if i != 0 and i % 100000 == 0:
